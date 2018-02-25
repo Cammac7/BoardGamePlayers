@@ -32,7 +32,6 @@ class Trie():
         inword = inword.upper()
         current = self.trie
         for char in inword:
-            print(char)
             if char not in current:
                 return False
             else:
@@ -83,17 +82,22 @@ class BoggleBoard():
         if self.dictionary.isWord(self.currentword):
             self.words.add(self.currentword)
         for n in innode.neighbors:
-            if n.value not in visited and self.dictionary.inTrie(self.currentword+n.value):
+            if n.value not in self.visited and self.dictionary.inTrie(self.currentword+n.value):
                 self.findWords(n)
+        self.currentword = self.currentword[:-1]
 
     def solveBoard(self):
+        print("solving board")
         self.words = set()
         self.currentword = ""
         self.visited = set()
         for loc in self.nodelist:
             self.visited = set()
-            self.findWords(self.nodelist[node])
+            self.currentword = ""
+            self.findWords(self.nodelist[loc])
+        print("words in board: {}".format(self.words))
 
 bb = [['Y','L','T','V'],['O','N','I','E'],['B','A','G','R'],['L','H','M','O']]
 newboard = BoggleBoard()
 newboard.buildBoard(bb)
+newboard.solveBoard()
