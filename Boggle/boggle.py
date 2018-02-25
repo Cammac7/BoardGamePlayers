@@ -82,7 +82,7 @@ class BoggleBoard():
         if self.dictionary.isWord(self.currentword):
             self.words.add(self.currentword)
         for n in innode.neighbors:
-            if n.value not in self.visited and self.dictionary.inTrie(self.currentword+n.value):
+            if n not in self.visited and self.dictionary.inTrie(self.currentword+n.value):
                 self.findWords(n)
         self.currentword = self.currentword[:-1]
 
