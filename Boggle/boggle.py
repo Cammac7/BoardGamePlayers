@@ -80,7 +80,7 @@ class BoggleBoard():
         self.visited.add(innode)
         self.currentword += innode.value
         if self.dictionary.isWord(self.currentword):
-            self.words.add(self.currentword)
+            self.words.append(self.currentword)
         for n in innode.neighbors:
             if n not in self.visited and self.dictionary.inTrie(self.currentword+n.value):
                 self.findWords(n)
@@ -88,13 +88,17 @@ class BoggleBoard():
 
     def solveBoard(self):
         print("solving board")
-        self.words = set()
+        self.words = []
         self.currentword = ""
         self.visited = set()
         for loc in self.nodelist:
             self.visited = set()
             self.currentword = ""
             self.findWords(self.nodelist[loc])
+        #self.findWords(self.nodelist[(0,1)])
+        #self.currentword = ""
+        #self.visited = set()
+        #self.findWords(self.nodelist[(0,0)])
         print("words in board: {}".format(self.words))
 
 bb = [['Y','L','T','V'],['O','N','I','E'],['B','A','G','R'],['L','H','M','O']]
